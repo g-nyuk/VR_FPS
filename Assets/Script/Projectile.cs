@@ -11,12 +11,17 @@ public class Projectile : MonoBehaviour
     {
         speed = newSpeed;
     }
+    // void Start()
+    // {
+    //     transform.Rotate(90, 0, 0);
+    // }
 
     void Update()
     {
         float moveDistance = speed * Time.deltaTime;
-        checkCollisions(moveDistance);
+        //checkCollisions(moveDistance);
         transform.Translate(Vector3.forward * moveDistance);
+        
     }
 
     void checkCollisions(float moveDistance)

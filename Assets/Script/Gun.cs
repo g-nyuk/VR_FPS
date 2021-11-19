@@ -5,7 +5,7 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     public Transform muzzle;
-    public Projectile Projectile;
+    public Projectile projectile;
     public float msBetweenShots = 100; //100ms
     public float muzzleVelocity = 35; //speed that bullet will leave the gun
 
@@ -16,7 +16,7 @@ public class Gun : MonoBehaviour
         if (Time.time > nextShotTime)
         {
             nextShotTime = Time.time + msBetweenShots / 1000;
-            Projectile newProjectile = Instantiate(Projectile, muzzle.position, muzzle.rotation) as Projectile;
+            Projectile newProjectile = Instantiate(projectile, muzzle.position, muzzle.rotation) as Projectile;
             newProjectile.Setspeed(muzzleVelocity);
         }
 
