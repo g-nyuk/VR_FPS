@@ -1,46 +1,47 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using System.Threading;
 
-[RequireComponent (typeof(PlayerController))] 
-[RequireComponent (typeof(GunController))] 
 public class Player : MonoBehaviour
 {
     public float movespeed = 5;
-
-    Camera viewCamera;
+    private Rigidbody rb;  
+    private GunController gunController;
+    public Camera myCamera;
     PlayerController controller;
-    GunController gunController;
+    private float movementX;
+    private float movementY;
 
+    public float rotSpeed = 100.0f;
+    private bool clicked = false;
     void Start()
     {
-        controller = GetComponent<PlayerController>(); // pc attach to player
+        rb = GetComponent<Rigidbody>();
+        myCamera = GetComponent<Camera>();
         gunController = GetComponent<GunController>();
-        viewCamera = Camera.main;
     }
 
-    void Update()
+    void OnFire()
     {
-        //Movement Input
-        Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"),0,Input.GetAxisRaw("Vertical")); //GetAxisRaw : doesn't do any default smoothing
-        Vector3 moveVelocity = moveInput.normalized * movespeed; // input + dircetion 
-        controller.Move(moveVelocity);
-
-        //Look Input
-        Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition); // screen position to mouse 
-        Plane groundPlane = new Plane(Vector3.up,Vector3.zero);
-        float rayDistance;
-
-        if(groundPlane.Raycast(ray, out rayDistance))
-        {
-            Vector3 point = ray.GetPoint(rayDistance);
-            //Debug.DrawLine(ray.origin, point, Color.red);
-            controller.LookAt(point);
-        }
-
-        //Weapon input 
-        if(Input.GetMouseButton(0))
-        {
-            gunController.Shoot();
-        }
+        gunController.Shoot();
     }
+
+    void OnMove(InputValue movementValue)
+    {
+        Vector2 movementVector = movementValue.Get<Vector2>();
+
+        movementX = movementVector.x;
+        movementY = movementVector.y;
+    }
+   
+    void FixedUpdate()
+    {
+        movespeed = movementX * rotSpeed;
+        transform.Rotate(new Vector3(0, movespeed, 0));
+        //Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+        //rb.AddForce(movement * movespeed);
+    }
+
 }
