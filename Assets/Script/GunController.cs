@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.InputSystem.Interactions;
 
 public class GunController : MonoBehaviour
 {
@@ -13,6 +16,7 @@ public class GunController : MonoBehaviour
         if(startingGun != null)
         {
             EquipGun(startingGun);
+            
         }
     }
 
@@ -25,12 +29,22 @@ public class GunController : MonoBehaviour
         equippedGun = Instantiate(gunToEquip, weaponHold.position,weaponHold.rotation) as Gun; // destroy previous gun
         equippedGun.transform.parent = weaponHold;
     }
-
+    void onFire()
+    {
+        Shoot();
+    }
     public void Shoot()
     {
         if(equippedGun != null)
         {
             equippedGun.Shoot();
+        }
+    }
+    public void Reload()
+    {
+        if(equippedGun != null)
+        {
+            equippedGun.Reload();
         }
     }
 }
