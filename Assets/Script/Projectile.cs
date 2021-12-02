@@ -11,19 +11,21 @@ public class Projectile : MonoBehaviour
     {
         speed = newSpeed;
     }
-    // void Start()
-    // {
-    //     transform.Rotate(90, 0, 0);
-    // }
+    void Start()
+    {
+        transform.Rotate(90, 0, 0);
+    }
 
     void Update()
     {
+        //스파이크볼과 맞았는지 체크
         float moveDistance = speed * Time.deltaTime;
         //checkCollisions(moveDistance);
-        transform.Translate(Vector3.forward * moveDistance);
+        transform.Translate(Vector3.up * moveDistance);
         
     }
 
+    //스파이크볼과 맞았는지 체크
     void checkCollisions(float moveDistance)
     {
         Ray ray = new Ray(transform.position,transform.forward);

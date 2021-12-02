@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2450003880798010204}
   - component: {fileID: -4740582928541220218}
   - component: {fileID: -5517397305656385279}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Big_Bullet 1
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
 --- !u!114 &2450003880798010204
 MonoBehaviour:
   m_ObjectHideFlags: 0
