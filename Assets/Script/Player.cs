@@ -15,9 +15,11 @@ public class Player : MonoBehaviour
     PlayerController controller;
     private float movementX;
     private float movementY;
-
+    public int health = 10;
     private Text scoreText;
 
+    private Text gameoverText;
+    private Text healthText;
     private int score = 0;
     public float rotSpeed = 100.0f;
     private bool clicked = false;
@@ -27,6 +29,9 @@ public class Player : MonoBehaviour
         myCamera = GetComponent<Camera>();
         gunController = GetComponent<GunController>();
         scoreText = GameObject.Find("Score").GetComponent<Text>();
+        gameoverText = GameObject.Find("GameOver").GetComponent<Text>();
+        healthText = GameObject.Find("Health").GetComponent<Text>();
+        healthText.text = "HP : " + health.ToString();
     }
 
 
@@ -58,6 +63,25 @@ public class Player : MonoBehaviour
     {
         score++;
         scoreText.text = "Score : " + score.ToString();
+        
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("adf");
+       if(other.gameObject.CompareTag("Target"))
+        {
+            Debug.Log("adf");
+            health--;
+            
+            healthText.text = "HP : " + health.ToString();
+            other.gameObject.SetActive(false);
+            if(health == 0)
+            {
+                gameoverText.text = "GAME OVER";
+                Time.timeScale = 0;
+            }
+
+        }
         
     }
 }
