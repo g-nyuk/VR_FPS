@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
     private Text healthText;
     private int score = 0;
     public float rotSpeed = 100.0f;
-    private bool clicked = false;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
