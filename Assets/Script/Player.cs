@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
             if(health == 0)
             {
                 gameoverText.text = "GAME OVER";
-                Time.timeScale = 0;
+                Time.timeScale = 1;
             }
 
         }
