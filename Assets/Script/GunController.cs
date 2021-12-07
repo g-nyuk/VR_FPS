@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.InputSystem.Interactions;
 
+
 public class GunController : MonoBehaviour
 {
     public Transform weaponHold;
@@ -38,13 +39,6 @@ public class GunController : MonoBehaviour
         if(equippedGun != null)
         {
             equippedGun.Shoot();
-        }
-    }
-    public void Reload()
-    {
-        if(equippedGun != null)
-        {
-            equippedGun.Reload();
         }
     }
 }

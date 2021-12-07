@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     public int health = 10;
     private Text scoreText;
 
+    public AudioSource damageSound;
+
     private Text gameoverText;
     private Text healthText;
     private int score = 0;
@@ -31,7 +33,6 @@ public class Player : MonoBehaviour
         gameoverText = GameObject.Find("GameOver").GetComponent<Text>();
         healthText = GameObject.Find("Health").GetComponent<Text>();
         healthText.text = "HP : " + health.ToString();
-        Time.timeScale = 3;
     }
 
 
@@ -55,10 +56,6 @@ public class Player : MonoBehaviour
     {
         gunController.Shoot();
     }
-    void OnReload()
-    {
-        gunController.Reload();
-    }
     public void addScore()
     {
         score++;
@@ -70,13 +67,13 @@ public class Player : MonoBehaviour
        if(other.gameObject.CompareTag("Target"))
         {
             health--;
-            
+            damageSound.Play();
             healthText.text = "HP : " + health.ToString();
             other.gameObject.SetActive(false);
             if(health == 0)
             {
                 gameoverText.text = "GAME OVER";
-                Time.timeScale = 1;
+                Time.timeScale = 0;
             }
 
         }
